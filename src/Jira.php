@@ -6,19 +6,19 @@ class Jira
 {
     /**
      * Url of the jira including https://
-     * @var string 
+     * @var string
      */
     var $url;
 
     /**
      * Username for theaccess
-     * @var string 
+     * @var string
      */
     var $username;
 
     /**
      * Password of the user
-     * @var string 
+     * @var string
      */
     var $password;
 
@@ -206,6 +206,19 @@ class Jira
     }
 
     /**
+     * Show function to view attributes of an existing issue
+     *
+     * @param string $issue
+     * @return mixed
+     */
+    public function show($issue )
+    {
+        $result = self::request( 'issue/' . $issue, false, false );
+
+        return json_decode( $result );
+    }
+
+    /**
      * CURL request to the JIRA REST api (v2)
      *
      * @param $request
@@ -237,6 +250,11 @@ class Jira
         if( $is_put )
         {
             curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'PUT' );
+        }
+
+        if(!$is_post && !$is_put)
+        {
+            curl_setopt( $ch, CURLOPT_HTTPGET, 1);
         }
 
         $response = curl_exec( $ch );

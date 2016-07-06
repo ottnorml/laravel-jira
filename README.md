@@ -6,6 +6,7 @@ Easy access Jira rest api in Laravel5.
 * [Getting Versions](#versions)
 * [Searching issues](#searching)
 * [Creating issues](#creating)
+* [Showing issues](#showing)
 * [Editing issues](#editing)
 * [Changing status or version of issues](#transitions)
 
@@ -103,6 +104,16 @@ $issue = $jira->create( array(
 Further information can be found on [JIRA documentation - create issue](https://developer.atlassian.com/jiradev/jira-apis/jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-example-create-issue)
 
 > **NOTE** fields parameter is already included in the payload
+
+<a name="showing"></a>
+## Showing issues
+
+The showing method will return attributes of an existing issue:
+
+```php
+$jira = new Jira();
+$jira->show( 'ISSUE-1234' );
+```
 
 <a name="editing"></a>
 ## Editing issues
